@@ -1,0 +1,484 @@
+<h2>License</h2>
+<p> Bqa is available for use under the <a href="https://github.com/javierdelacueva/bqa/blob/master/LICENSE" target="_blank">MIT software license</a>. </p>
+<h2>Download</h2>
+<p> You can download it from my <a href="https://github.com/javierdelacueva/bqa" target="_blank">github repository</a>. </p>
+<h2>Tutorial</h2>
+<h2>1. Create a new Class</h2>
+<h3>Model</h3>
+<p>Duplicate the file /public/js/models/example.js and rename it with the name that you want.
+<br/>
+Example /public/js/models/other.js</p>
+<p>Now you have to modify the code.</p>
+<p>Change the model name:</p>
+<pre>
+6. bqa.<span class="help_from">Example</span> = bqa.BqaModel.extend(<span class="help_from">"Example"</span>, {
+</pre>
+<p>for</p>
+<pre>
+6. bqa.<span class="help_to">Other</span> = bqa.BqaModel.extend(<span class="help_to">"Other"</span>, {
+</pre>
+<p>Change the collection:</p>
+<pre>
+54. bqa.<span class="help_from">Example</span>Collection = bqa.BqaCollection.extend({
+55.   model: <span class="help_from">"Example"</span>
+56. });
+</pre>
+<p>for</p>
+<pre>
+54. bqa.<span class="help_to">Other</span>Collection = bqa.BqaCollection.extend({
+55.   model: <span class="help_to">"Other"</span>
+56. });
+</pre>
+<p>And finally, add columns to your model using the default parameter:</p>
+<pre>
+23. defaults: {
+24.   objectId: null,
+25.   name: "",
+26.   description: ""
+27. }
+</pre>
+<h3>Router</h3>
+<p>You can use just one router or several routers if you want to organize better your code. Just be careful and don't use the same path in different routers.</p>
+<p>If you want to create a new router, duplicate the file /public/js/routers/ExampleRouter.js.<br/>
+Example: /public/js/routers/OtherRouter.js</p>
+<p>Once your router has been created, change the class name:</p>
+<pre>
+6. bqa.<span class="help_from">Example</span>Router = Parse.Router.extend({
+</pre>
+<p>for</p>
+<pre>
+6. bqa.<span class="help_to">Other</span>Router = Parse.Router.extend({
+</pre>
+<p>Now you have to add your routes, here are created the basic routes for the CRUD, including add, edit, list and pagination.</p>
+<p>Change the code below:</p>
+<pre>
+8.  routes: {
+9.   "<span class="help_from">examples</span>"                                   : "list",
+10.  "<span class="help_from">examples</span>/page/:page"                        : "list",
+11.  "<span class="help_from">examples</span>/page/:page/order/:order"           : "list",
+12.  "<span class="help_from">examples</span>/page/:page/order/:order/dir/:dir"  : "list",
+13.  "<span class="help_from">example</span>/add"                                : "add",
+14.  "<span class="help_from">example</span>/:id"                                : "details"
+15. },
+</pre>
+<p>for</p>
+<pre>
+8.  routes: {
+9.   "<span class="help_to">others</span>"                                   : "list",
+10.  "<span class="help_to">others</span>/page/:page"                        : "list",
+11.  "<span class="help_to">others</span>/page/:page/order/:order"           : "list",
+12.  "<span class="help_to">others</span>/page/:page/order/:order/dir/:dir"  : "list",
+13.  "<span class="help_to">other</span>/add"                                : "add",
+14.  "<span class="help_to">other</span>/:id"                                : "details"
+15. },
+</pre>
+<p>Then, you have to modify the header initialization. Change this:</p>
+<pre>
+20. "href": "#<span class="help_from">examples</span>",
+...
+26. "href": "#<span class="help_from">example</span>/add",
+</pre>
+<p>for this:</p>
+<pre>
+20. "href": "#<span class="help_to">others</span>",
+...
+26. "href": "#<span class="help_to">other</span>/add",
+</pre>
+<p>Finally we have to change the basic methods list, details and add.</p>
+<p><b>list</b></p>
+<p>Change this:</p>
+<pre>
+...
+44. var <span class="help_from">exmple</span>List = new bqa.<span class="help_from">Exmple</span>Collection();
+45. <span class="help_from">exmple</span>List.fetch({cache: false, success: function () {
+46.  $("#content").html(new bqa.<span class="help_from">Exmple</span>ListView({
+47.   model: <span class="help_from">exmple</span>List,
+...
+</pre>
+<p>with this:</p>
+<pre>
+...
+44. var <span class="help_to">other</span>List = new bqa.<span class="help_to">Other</span>Collection();
+45. <span class="help_to">other</span>List.fetch({cache: false, success: function () {
+46.  $("#content").html(new bqa.<span class="help_to">Other</span>ListView({
+47.   model: <span class="help_to">other</span>List,
+...
+</pre>
+<p><b>details</b></p>
+<p>Change this:</p>
+<pre>
+...
+60. var <span class="help_from">example</span> = new bqa.<span class="help_from">Example</span>({id: id});
+61. <span class="help_from">example</span>.fetch({cache: false, success: function () {
+62.  $("#content").html(new bqa.<span class="help_from">Example</span>View({model: <span class="help_from">example</span>}).el);
+63. }});
+...
+</pre>
+<p>with this:</p>
+<pre>
+...	
+60. var <span class="help_to">other</span> = new bqa.<span class="help_to">Other</span>({id: id});
+61. <span class="help_to">other</span>.fetch({cache: false, success: function () {
+62.  $("#content").html(new bqa.<span class="help_to">Other</span>View({model: <span class="help_to">other</span>}).el);
+63. }});
+...
+</pre>
+<p><b>add</b></p>
+<p>Change this:</p>
+<pre>
+...	
+70. var <span class="help_from">example</span> = new bqa.<span class="help_from">Example</span>();
+71. $('#content').html(new bqa.<span class="help_from">Example</span>View({model: <span class="help_from">example</span>}).el);
+...
+</pre>
+<p>with this:</p>
+<pre>
+...
+70. var <span class="help_to">other</span> = new bqa.<span class="help_to">Other</span>();
+71. $('#content').html(new bqa.<span class="help_to">Other</span>View({model: <span class="help_to">other</span>}).el);
+...
+</pre>
+<h3>View</h3>
+<p>You can use as many views as you need, for this basic App we have just 3. One for show the details and two for build the list of items with its pagination.</p>
+<p>Let's duplicate these three files and rename them:</p>
+<p>Original files:</p>
+<p><span class="help_from">/public/js/views/example/ExampleListItemView.js</span></p>
+<p><span class="help_from">/public/js/views/example/ExampleListView.js</span></p>
+<p><span class="help_from">/public/js/views/example/ExampleView.js</span></p>
+<p>New files:</p>
+<p><span class="help_to">/public/js/views/other/OtherListItemView.js</span></p>
+<p><span class="help_to">/public/js/views/other/OtherListView.js</span></p>
+<p><span class="help_to">/public/js/views/other/OtherView.js</span></p>
+<p>And now, we can modify the files.</p>
+<p><b>OtherListItemView.js</b></p>
+<p>Change the class name:</p>
+<pre>
+6. bqa.<span class="help_from">Example</span>ListItemView = Parse.View.extend({
+</pre>
+<p>with this:</p>
+<pre>
+6. bqa.<span class="help_to">Other</span>ListItemView = Parse.View.extend({
+</pre>
+<p><b>OtherListView.js</b></p>
+<p>Change the class name:</p>
+<pre>
+6. bqa.<span class="help_from">Example</span>ListView = Parse.View.extend({
+</pre>
+<p>with this:</p>
+<pre>
+6. bqa.<span class="help_to">Other</span>ListView = Parse.View.extend({
+</pre>
+<p>Then, we'll add the class name to generate the URLs changing this:</p>
+<pre>
+14. var model_name = <span class="help_from">"examples"</span>;
+</pre>
+<p>with this:</p>
+<pre>
+14. var model_name = <span class="help_to">"others"</span>;
+</pre>
+<p>We have to modify the headers array which it'll display the headers of the list. We are going to use as many headers as rows we have in our class, but you can use as many headers as you want:</p>
+<pre>
+22. var headers = [
+23.  {"value": "objectId", "name": "ID"},
+24.  {"value": "name", "name": "Name"},
+25.  {"value": "description", "name": "Description"}
+26. ];
+</pre>
+<p>And finally we change the call we use to display all the rows of our list:</p>
+<pre>
+...
+56. for (i = startPos; i < endPos; i++) {
+57.  $('.table', this.el).append(new bqa.<span class="help_from">Example</span>ListItemView({model: models[i]}).render().el);
+58. }
+...
+</pre>
+<p>with this:</p>
+<pre>
+...
+56. for (i = startPos; i < endPos; i++) {
+57.  $('.table', this.el).append(new bqa.<span class="help_to">Other</span>ListItemView({model: models[i]}).render().el);
+58. }
+...
+</pre>
+<p><b>OtherView.js</b></p>
+<p>First we have to change the class name:</p>
+<pre>
+6. bqa.<span class="help_from">Example</span>View = Parse.View.extend({
+</pre>
+<p>with this:</p>
+<pre>
+6. bqa.<span class="help_to">Other</span>View = Parse.View.extend({
+</pre>
+<p>And then, we change the url for redirection:</p>
+<pre>
+...
+52. Parse.history.navigate("<span class="help_from">example</span>/" + model.id, false);
+...
+64. Parse.history.navigate("/#<span class="help_from">examples</span>", true);
+...
+</pre>
+<p>with this:</p>
+<pre>
+...
+52. Parse.history.navigate("<span class="help_to">other</span>/" + model.id, false);
+...
+64. Parse.history.navigate("/#<span class="help_to">others</span>", true);
+...
+</pre>
+<h2>2. Templates</h2>
+<p>Now, we have to make some small modifications in our templates. In this example we have only two templates: ExampleListItemView.html and ExampleView.html.</p>
+<p>First, we have to duplicate files:</p>
+<p>Original files:</p>
+<p><span class="help_from">/public/tpl/example/ExampleListItemView.html</span></p>
+<p><span class="help_from">/public/tpl/example/ExampleView.html</span></p>
+<p>New files:</p>
+<p><span class="help_to">/public/tpl/other/OtherListItemView.html</span></p>
+<p><span class="help_to">/public/tpl/other/OtherView.html</span></p>
+<p>And now we can start modifying files.</p>
+<p><b>OtherListItemView.html</b></p>
+<p>We use this template to display row's content inside the list. Just modify the url and add the columns of the class that you want to display.</p>
+<pre>
+  &lt;td&gt;&lt;a href="#<span class="help_from">example</span>/&lt;%= objectId %&gt;"&gt;&lt;%= objectId %&gt;&lt;/a&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;%= name %&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;%= description %&gt;&lt;/td&gt;	
+</pre>
+<p><b>OtherView.html</b></p>
+<p>We have to modify the label's attribute "for" and use the same name that we'll use in the input's attribute "id". We'll use model's name for instance.</p>
+<pre>
+  &lt;div class="control-group"&gt;
+    &lt;label for="exampleId" class="control-label"&gt;Id:&lt;/label&gt;
+
+    &lt;div class="controls"&gt;
+      &lt;input id="exampleId" name="id" type="text" value="&lt;%= objectId === null ? '' : objectId %&gt;" disabled/&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</pre>
+<p>And display your values.</p>
+<pre>
+  &lt;div class="control-group"&gt;
+    &lt;label for="name" class="control-label"&gt;Name:&lt;/label&gt;
+
+    &lt;div class="controls"&gt;
+      &lt;input type="text" id="name" name="name" value="&lt;%= name %&gt;"/&gt;
+      &lt;span class="help-inline"&gt;&lt;/span&gt;
+  	&lt;/div&gt;
+  &lt;/div&gt;	
+</pre>
+<h2>3. Modify config files</h2>
+<p>Once you have created your new files, you have to modify just two more files and you'll good to go.</p>
+<p><b>require.js</b></p>
+<p>This is the first file which is loaded and it'll load the rest of the javascript files. It starts loading the external libraries, then <b>config</b> and b>utils</b> files and finally, the rest of the javascript files from your App.</p>
+<pre>
+  var scripts = [
+    "libs/jquery-1.8.2.min",
+    "libs/underscore-min",
+    "libs/backbone-min",
+    "libs/bootstrap.min",
+    "http://www.parsecdn.com/js/parse-1.2.13.min",
+    "config",
+    "js/utils/utils",
+    "js/models/example",
+    <span class="help_from">"js/models/other",</span>
+    "js/views/example/ExampleListItemView",
+    "js/views/example/ExampleListView",
+    "js/views/example/ExampleView",
+    <span class="help_from">"js/views/other/OtherListItemView",</span>
+    <span class="help_from">"js/views/other/OtherListView",</span>
+    <span class="help_from">"js/views/other/OtherView",</span>    
+    "js/views/bqa/LoginView",
+    "js/views/bqa/HomeView",
+    "js/views/bqa/HelpView",
+    "js/views/Paginator",
+    "js/views/HeaderView",
+    "js/routers/ExampleRouter",
+    <span class="help_from">"js/routers/OtherRouter",</span>
+    "js/routers/BqaRouter",
+    "js/main"
+  ];
+</pre>
+<p><b>config.js</b></p>
+<p>This is the last file that you will have to modify. This is the config file and we use it to dinamically load all templates, initializes routers and your Parse keys.</p>
+<pre>
+bqa.initialConfig = {
+  parse: {
+    'app_key' : <span class="help_from">'YOUR PARSE APP KEY'</span>,
+    'js_key' : <span class="help_from">'YOUR PARSE JAVASCRIPT KEY'</span>
+  },
+  templates: {
+    'example' : ['ExampleListItemView', 'ExampleView'],
+    <span class="help_from">'other' : ['OtherListItemView', 'OtherView'],</span>
+    'bqa' : ['LoginView', 'HomeView', 'HelpView'],
+    'layouts' : ['HeaderView']
+  },
+  routers: [
+    'BqaRouter',
+    'ExampleRouter',
+    <span class="help_from">'OtherRouter'</span>
+  ]
+};	
+</pre>
+<h2>4. Models with relation</h2>
+<p><i>Under construction</i></p>
+<h2>5. Configure the Header</h2>
+<p>In this example we've created a header divided in two parts: pull-left and pull-right.</p>
+<p><b>pull-left</b></p>
+<p>The first part is displayed in the center of the header, just after the home link. We'll use it to display specific action from a particular view, for instance, "Add" and "List" buttons.</p>
+<p><b>pull-right</b></p>
+<p>Here we display global actions as "Login" button or "Help" button.</p>
+<p>In order to set up which actions you want to display in the "pull-left" bar you have to call "new bqa.HeaderView(nav)" and fill the correct parameters. You can find an example at /public/js/routers/ExampleRouter.js.</p>
+<p>These are the possible parameters:</p>
+<p>
+	<b>href</b>: The link to redirect when click the button.<br/>
+	<b>nav_class</b>: Class for the button, by default will be "list-menu".<br/>
+	<b>name</b>: The name that it'll be displayed.<br/>
+	<b>icon</b>: You can display an icon, add the name of the class or leave it "null" if you don't want to show any icon.<br/>
+</p>
+<pre>
+  var nav = [
+  	{
+    	"href": "#examples",
+      "nav_class": "list-menu",
+      "name": "Browse",
+      "icon": null
+    },
+    {
+      "href": "#example/add",
+      "nav_class": "add-menu",
+      "name": "Add",
+      "icon": "icon-edit icon-white"
+    }
+  ];
+
+  this.headerView = new bqa.HeaderView(nav);
+  $('.header').html(this.headerView.el);
+</pre>
+<h2>6. Use validators</h2>
+<p>You can use validators in your models, you just have to add them to the initialize function. You can find an example at /public/js/models/example.js.</p>
+<pre>
+  this.validators = {};
+
+  this.validators.name = function (value) {
+    return value.length > 0
+      ? {isValid: true}
+      : {isValid: false, message: "You must enter a name"};
+  };
+
+  this.validators.description = function (value) {
+    return value.length > 0
+      ? {isValid: true}
+      : {isValid: false, message: "You must enter a description"};
+  };
+</pre>
+<h2>7. Icons</h2>
+<p>We are using <a href="http://getbootstrap.com" target="_blank">bootstrap</a> to render the CSS style and the responsive design and <a href="http://fontawesome.io" target="_blank">Font Awesome</a> for icons. Go to the <a href="http://fontawesome.io" target="_blank">icons section</a> to see all icons you can use.</p>
+<h2>8. Roles in Parse</h2>
+<p>After create all your classes is recommendable to add permissions to them. In Parse you can create a "Role", let's say an "Admin role" and allow only to this role access to your classes.</p>
+<p>The first thing to do would be create a new user and make him Admin of your App.</p>
+<p>Here is the code:</p>
+<pre>
+// Create a role
+function createRole() {
+  var roleACL = new Parse.ACL();
+  roleACL.setWriteAccess(Parse.User.current(), true);
+  roleACL.setPublicReadAccess(true);
+  var role = new Parse.Role("Administrator", roleACL);
+  role.getUsers().add(Parse.User.current());
+
+  role.save(null, {
+    success: function(saveObject) {
+      // The object was saved successfully.
+      alert('role creation done');
+    },
+    error: function(saveObject, error) {
+      // The save failed.
+      alert("Failed creating role with error: " + error.code + ":"+ error.message);
+    }
+  });
+}
+</pre>
+<pre>
+// Update a role
+function updateRole (user) {
+  var query = new Parse.Query(Parse.Role);
+  query.equalTo("name", "Administrator");
+
+  query.get(null, {
+    success: function(returnObj) {
+      alert("found role: "+ returnObj.id + ' '+returnObj.get("name"));
+      returnObj.getUsers().add(user);
+      updateRoleACL(returnObj);
+    },
+    error: function(returnObj, error) {
+      window.alert("Failed with error: " + error.code + ":"+ error.message);
+    }
+  });
+}
+
+function updateRoleACL(role) {
+  var roleACL = role.getACL();
+  roleACL.setWriteAccess(Parse.User.current(), false);
+  roleACL.setRoleWriteAccess(role,true);
+  role.save(null, {
+    success: function(saveObject) {
+      // The object was saved successfully.
+      alert('role acl updated');
+    },
+    error: function(saveObject, error) {
+      // The save failed.
+      alert("Failed updating role with error: " + error.code + ":"+ error.message);
+    }
+  });
+}
+</pre>
+<h2>9. Libraries</h2>
+<p>This App it's based on the following libraries:</p>
+<a href="http://jquery.com/" target="_blank">jquery</a><br/>
+<a href="http://underscorejs.org/" target="_blank">underscore</a><br/>
+<a href="http://backbonejs.org/" target="_blank">backbone</a><br/>
+<a href="http://getbootstrap.com/" target="_blank">bootstrap</a><br/>
+<a href="https://parse.com/" target="_blank">Parse</a><br/>
+<h2>10. Referers</h2>
+<p><b><a href="http://coenraets.org" target="_blank">Christophe Coenraets</a></b></p>
+<p>He has such good tutorials that is totally recommended take a look into his page.</p>
+<p>Most part of this code is from his post <a href="http://coenraets.org/blog/2012/05/single-page-crud-application-with-backbone-js-and-twitter-bootstrap/" target="_blank">Single-Page CRUD Application with Backbone.js and Twitter Bootstrap</a></p>
+<p>And this <a href="https://parse.com/tutorials/todo-app-with-javascript" target="_blank">tutorial</a> is for understand how to create a Parse App with Backbone base in the <a href="http://todomvc.com/" target="_blank">canonical Backbone todo application</a></p>
+<h2>11. Contact</h2>
+<div>
+	<p>	
+		<a class="btn btn-lg btn-default" target="_blank" href="http://www.javierdelacueva.com" style="width:200px;text-align:left;">
+	  	<span class="fa-stack fa-lg">
+	    	<i class="fa fa-cloud fa-stack-1x"></i>
+	    </span>
+	    javierdelacueva.com
+	  </a>
+	  <br/><br/>
+		<a class="btn btn-lg btn-default" target="_blank" href="http://www.facebook.com/javierdelacuevaorts" style="width:200px;text-align:left;">
+	  	<span class="fa-stack fa-lg">
+	    	<i class="fa fa-facebook fa-stack-1x"></i>
+	    </span>
+	    Facebook
+	  </a>
+	  <br/><br/>
+		<a class="btn btn-lg btn-default" target="_blank" href="https://twitter.com/javierdelacueva" style="width:200px;text-align:left;">
+	  	<span class="fa-stack fa-lg">
+	    	<i class="fa fa-twitter fa-stack-1x"></i>
+	    </span>
+	    Twitter
+	  </a>
+	  <br/><br/>
+		<a class="btn btn-lg btn-default" target="_blank" href="http://www.linkedin.com/in/javierdelacueva" style="width:200px;text-align:left;">
+	  	<span class="fa-stack fa-lg">
+	    	<i class="fa fa-linkedin fa-stack-1x"></i>
+	    </span>
+	    LinkedIn
+	  </a>
+	  <br/><br/>
+		<a class="btn btn-lg btn-default" target="_blank" href="https://github.com/javierdelacueva" style="width:200px;text-align:left;">
+	  	<span class="fa-stack fa-lg">
+	    	<i class="fa fa-github-alt fa-stack-1x"></i>
+	    </span>
+	    Github
+	  </a>
+	</p>
+  <br/><br/><br/><br/>
+</div>

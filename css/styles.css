@@ -1,0 +1,86 @@
+body {
+    padding-top: 60px;
+}
+.navbar {
+    z-index: 10;
+}
+
+.brand .fa-stack {
+    height: 1em;
+    line-height: 1em;
+}
+
+#main-header .navbar-inner .container .nav-collapse .nav {
+    margin-top: 2px;
+}
+
+table.table thead .sorting,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+    cursor: pointer;
+    *cursor: hand;
+}
+
+table.table thead .sorting { background: url('../img/sort/sort_both.png') no-repeat center left; padding-left: 15px;}
+table.table thead .sorting_asc { background: url('../img/sort/sort_asc.png') no-repeat center left;  padding-left: 15px;}
+table.table thead .sorting_desc { background: url('../img/sort/sort_desc.png') no-repeat center left;  padding-left: 15px;}
+
+table.table thead .sorting_asc_disabled { background: url('../img/sort/sort_asc_disabled.png') no-repeat center right; padding-left: 15px;}
+table.table thead .sorting_desc_disabled { background: url('../img/sort/sort_desc_disabled.png') no-repeat center right; padding-left: 15px;}
+
+.main-panel {
+    background-color: #F7F7F9;
+    background-size: cover;
+    border-width: 1px;
+    margin-top: -19px;
+    padding: 20px;
+    text-align : left;
+    text-shadow: 1px 1px 1px #C8C8C8;
+}
+
+.main-panel .btn {
+    margin: 10px 4px;
+}
+
+.navbar .nav > li > a > i {
+    margin-right: 5px;
+}
+
+.nav.pull-right li {
+    line-height: 15px;
+}
+
+#preloader {
+    display: none;
+    background: none;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+    height: 85px;
+}
+
+.help_from {
+    color:red;
+}
+.help_to {
+    color:green;
+}
+@media only screen and ( max-width : 1000px ) {
+    body {
+        padding-top: 0px;
+    }
+    .main-panel {
+        padding:100px;
+    }
+}
+
+@media only screen and ( max-width : 480px ) {
+    body {
+        padding-top: 0px;
+    }
+    .main-panel {
+        padding:32px;
+    }
+}
