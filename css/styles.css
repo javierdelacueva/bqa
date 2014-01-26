@@ -61,12 +61,20 @@ table.table thead .sorting_desc_disabled { background: url('../img/sort/sort_des
     height: 85px;
 }
 
+.loading {
+    width:100px;
+    margin:0 auto;
+    text-align:center;
+}
+
 .help_from {
     color:red;
 }
+
 .help_to {
     color:green;
 }
+
 @media only screen and ( max-width : 1000px ) {
     body {
         padding-top: 0px;
